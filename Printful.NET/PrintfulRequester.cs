@@ -67,7 +67,7 @@ namespace Printful.NET
                 }
 
                 //kick off the actual request
-                using (WebResponse wr = request.GetResponse())
+                using (HttpWebResponse wr = (HttpWebResponse)request.GetResponse())
                 {
                     string responseBody = "";
                     using (StreamReader sr = new StreamReader(wr.GetResponseStream()))
@@ -76,7 +76,7 @@ namespace Printful.NET
                         result.RawBody = responseBody;
                         if (_printful.VerboseLogging)
                         {
-                            _printful.WriteInfo("Request returned " + responseBody);
+                            _printful.WriteInfo(String.Format("Request to {0} returned {1} ({2}): {3}", url, wr.StatusCode, (int)wr.StatusCode, responseBody));
                         }
                     }
 

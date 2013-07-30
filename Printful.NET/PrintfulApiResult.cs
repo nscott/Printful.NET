@@ -29,7 +29,7 @@ namespace Printful.NET
 
         [DataMember(Name = "created")]
         public long Created { get; set; }
-
+        
         [DataMember(Name = "status")]
         public string Status { get; set; }
 

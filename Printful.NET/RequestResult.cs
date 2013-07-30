@@ -23,7 +23,7 @@ namespace Printful.NET
         public int Code { get; set; }
 
         [DataMember(Name = "result")]
-        public string RawResult { get; set; }
+        public PrintfulApiResult Result { get; set; }
 
         public PrintfulRequestResult()
         {
@@ -33,14 +33,17 @@ namespace Printful.NET
 
         public void DeserializeRawBody()
         {
-            DataContractJsonSerializer ser = new DataContractJsonSerializer(typeof(PrintfulRequestResult));
-            using (MemoryStream ms = new MemoryStream(Encoding.UTF8.GetBytes(RawBody)))
+            if (!String.IsNullOrEmpty(RawBody))
             {
-                PrintfulRequestResult result = (PrintfulRequestResult)ser.ReadObject(ms);
-                this.Status = result.Status;
-                this.Code = result.Code;
-                this.Success = result.Status;
-                this.RawResult = result.RawResult;
+                DataContractJsonSerializer ser = new DataContractJsonSerializer(typeof(PrintfulRequestResult));
+                using (MemoryStream ms = new MemoryStream(Encoding.UTF8.GetBytes(RawBody)))
+                {
+                    PrintfulRequestResult result = (PrintfulRequestResult)ser.ReadObject(ms);
+                    this.Success = result.Status;
+                    this.Status = result.Status;
+                    this.Code = result.Code;
+                    this.Result = result.Result;
+                }
             }
         }
     }

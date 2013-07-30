@@ -45,7 +45,7 @@ namespace Printful.NET
             Console.WriteLine(order.ToJson());
             Console.WriteLine();
 
-            Printful print = new Printful("YOUR-API-KEY");
+            Printful print = new Printful("sjk81fow-60v6-6z6r:vqi6-r78f8jxdrnhm");
             print.LetExceptionsBubble = true;
             print.VerboseLogging = true;
             try

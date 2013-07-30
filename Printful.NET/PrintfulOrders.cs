@@ -29,10 +29,6 @@ namespace Printful.NET
 
                 result = SendRequest(url, jsonToSend, "POST");
                 result.DeserializeRawBody();
-                if (_printful.VerboseLogging)
-                {
-                    _printful.WriteInfo("CreateOrder response: "+result.RawBody);
-                }
             }
             catch (Exception e)
             {
@@ -64,10 +60,6 @@ namespace Printful.NET
                 string url = Printful.ApiUrl + "orders/" + orderId;
                 result = SendRequest(url, updatedOrder.ToJson(), "PUT");
                 result.DeserializeRawBody();
-                if (_printful.VerboseLogging)
-                {
-                    _printful.WriteInfo("UpdateOrder response: " + result.RawBody);
-                }
             }
             catch (Exception e)
             {
@@ -94,10 +86,6 @@ namespace Printful.NET
         {
             string url = Printful.ApiUrl + "orders/" + orderId;
             PrintfulRequestResult result = SendRequest(url, null, "DELETE");
-            if (_printful.VerboseLogging)
-            {
-                _printful.WriteInfo("DeleteOrder response: " + result.RawBody);
-            }
             if (result != null)
             {
                 return result.Success;
